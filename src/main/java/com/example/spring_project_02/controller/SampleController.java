@@ -1,10 +1,14 @@
 package com.example.spring_project_02.controller;
 
+import com.example.spring_project_02.dto.TodoDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -37,14 +41,45 @@ public class SampleController {
         log.info("dueDate: " + dueDate);
     }
 
+    @GetMapping("/ex4")
+    public void ex4(Model model) {
+        log.info("------");
+        model.addAttribute("message", "Hello World");
+    }
 
+    @GetMapping("/ex4_1")
+    public void ex4Extra(@ModelAttribute("dto") TodoDTO todoDTO, Model model) {
+        log.info(todoDTO);
+    }
 
+    @GetMapping("/ex5")
+    public String ex5(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("name", "ABC");
+        redirectAttributes.addFlashAttribute("result", "success");
 
+        return "redirect:/ex6";
+    }
 
+    @GetMapping("/ex6")
+    public void ex6() {
 
-
-
-
-
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
