@@ -11,6 +11,7 @@
        http://mybatis.org/schema/mybatis-spring.xsd">
     
     <context:component-scan base-package="com.example.spring_project_02.sample"/>
+    <context:component-scan base-package="com.example.spring_project_02.config"/>
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
@@ -32,6 +33,7 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:/mapper/**/*.xml"/>
     </bean>
 
     <mybatis:scan base-package="com.example.spring_project_02.mapper"/>
