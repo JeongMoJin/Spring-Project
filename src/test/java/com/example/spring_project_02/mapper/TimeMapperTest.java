@@ -28,4 +28,5 @@ public class TimeMapperTest {
     public void testGetTime() {
         log.info(timeMapper2.getNow());
     }
+
 }

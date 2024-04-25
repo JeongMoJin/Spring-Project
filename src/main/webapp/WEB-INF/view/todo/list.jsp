@@ -35,37 +35,35 @@
         Featured
       </div>
       <div class="card-body">
-        <form method="post">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Title</span>
-            <input type="text" name="title" class="form-control" placeholder="Title">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">DueDate</span>
-            <input type="date" name="dueDate" class="form-control">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Writer</span>
-            <input type="text" name="writer" class="form-control" placeholder="Writer">
-          </div>
-          <div class="my-4">
-            <div class="float-end">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="reset" class="btn btn-secondary">Reset</button>
-            </div>
-          </div>
-        </form>
-        <script>
-          const serverValidResult = {};
-          <c:forEach items="${errors}" var="error">
-          serverValidResult[`${error.getField()}`] = `${error.defaultMessage}`;
-          </c:forEach>
-          console.log(serverValidResult);
-        </script>
-      </div>
-    </div>
 
+        <h5 class="card-title">Special title Treatment</h5>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Tno</th>
+            <th scope="col">Title</th>
+            <th scope="col">Writer</th>
+            <th scope="col">DueDate</th>
+            <th scope="col">Finished</th>
+          </tr>
+          </thead>
+          <tbody>
+          <c:forEach var="dto" items="${dtoList}">
+          <tr>
+            <th scope="row">${dto.tno}</th>
+            <td>${dto.title}</td>
+            <td>${dto.writer}</td>
+            <td>${dto.dueDate}</td>
+            <td>${dto.finished}</td>
+          </tr>
+          </c:forEach>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
     <div class="row content">
+      <h1>Content</h1>
       <div class="row footer">
         <!--                <h1>Footer</h1>-->
         <div class="row fixed-bottom" style="z-index: -100">
