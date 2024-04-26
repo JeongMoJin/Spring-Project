@@ -1,6 +1,8 @@
 package com.example.spring_project_02.service;
 
 import com.example.spring_project_02.domain.TodoVO;
+import com.example.spring_project_02.dto.PageRequestDTO;
+import com.example.spring_project_02.dto.PageResponseDTO;
 import com.example.spring_project_02.dto.TodoDTO;
 import com.example.spring_project_02.mapper.TodoMapper;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,23 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+            List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+            List<TodoDTO> dtoList = new ArrayList<>();
+            for(TodoVO todoVO : voList) {
+                dtoList.add(modelMapper.map(todoVO, TodoDTO.class));
+            }
+            int total = todoMapper.getCount(pageRequestDTO);
+
+            PageResponseDTO<TodoDTO> pageResponseDTO = PageResponseDTO.<TodoDTO>withAll()
+                    .dtoList(dtoList)
+                    .total(total)
+                    .pageRequestDTO(pageRequestDTO)
+                    .build();
+            return pageResponseDTO;
+    }
+
+//    @Override
     public List<TodoDTO> getAll() {
         List<TodoVO> voList = todoMapper.selectAll(); // dto에서 데이터베이스에서 들고온 VO리스트를 리턴
         List<TodoDTO> dtoList = new ArrayList<>();
@@ -38,6 +57,29 @@ public class TodoServiceImpl implements TodoService {
         }
         return dtoList;
     }
+
+    @Override
+    public TodoDTO getOne(Long tno) {
+        TodoVO todoVO = todoMapper.selectOne(tno);
+        TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);
+        return todoDTO;
+    }
+
+    @Override
+    public void remove(Long tno) {
+        todoMapper.delete(tno);
+    }
+
+    @Override
+    public void modify(TodoDTO todoDTO) {
+        log.info("modify()...");
+        // vo 객체를 생성하면서 매개변수로 받은 (값이 입력되어 있는) dto와 vo를 맵핑을 해서 vo에 값을 입력.
+        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
+        log.info(todoVO);
+        todoMapper.update(todoVO);
+    }
+
+
 }
 
 

@@ -36,50 +36,48 @@
       </div>
       <div class="card-body">
 
-        <h5 class="card-title">Special title Treatment</h5>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Tno</th>
-            <th scope="col">Title</th>
-            <th scope="col">Writer</th>
-            <th scope="col">DueDate</th>
-            <th scope="col">Finished</th>
-          </tr>
-          </thead>
-          <tbody>
-          <c:forEach var="dto" items="${responseDTO.dtoList}">
-          <tr>
-            <th scope="row">${dto.tno}</th>
-            <td><a href="/todo/read?tno=${dto.tno}" class="text-decoration-none"> ${dto.title}</a></td>
-            <td>${dto.writer}</td>
-            <td>${dto.dueDate}</td>
-            <td>${dto.finished}</td>
-          </tr>
-          </c:forEach>
-          </tbody>
-        </table>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Tno</span>
+            <input type="text" name="tno" class="form-control" value="${dto.tno}" readonly>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Title</span>
+            <input type="text" name="title" class="form-control" value="${dto.title}" readonly>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">DueDate</span>
+            <input type="date" name="dueDate" class="form-control" value="${dto.dueDate}" readonly>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Writer</span>
+            <input type="text" name="writer" class="form-control" value="${dto.writer}" readonly>
+          </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            Finished &nbsp;
+          </label>
+          <input class="form-check-input" type="checkbox" name="finished" ${dto.finished ? "checked" : ""} disabled>
+           </div>
+          <div class="my-4">
+            <div class="float-end">
+              <button type="button" class="btn btn-primary">Modify</button>
+              <button type="button" class="btn btn-secondary">List</button>
+            </div>
+          </div>
 
 
-        <div class="float-end">
-          <ul class="pagination flex-wrap">
-            <c:if test="${responseDTO.prev}">
-              <li class="page-item">
-                <a class="page-link">Previous</a>
-              </li>
-            </c:if>
-            <c:forEach var="num" begin="${responseDTO.start}" end="${responseDTO.end}">
-              <li class="page-item"><a class="page-link" href="#">${num}</a></li>
-            </c:forEach>
-            <c:if test="${responseDTO.next}">
-              <li class="page-item">
-                <a class="page-link">Next</a>
-              </li>
-            </c:if>
-          </ul>
-        </div>
+        <script>
+          document.querySelector(".btn-primary").addEventListener("click", function () {
+            self.location = "/todo/modify?tno=" + ${dto.tno};
+          });
+
+          document.querySelector(".btn-secondary").addEventListener("click", function () {
+            self.location = "/todo/list";
+          })
+        </script>
+
       </div>
-
     </div>
     <div class="row content">
       <h1>Content</h1>
