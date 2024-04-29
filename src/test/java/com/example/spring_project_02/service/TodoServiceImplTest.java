@@ -31,13 +31,13 @@ class TodoServiceImplTest {
         todoService.register(todoDTO);
     }
 
-    @Test
-    public void testGetAll() {
-        List<TodoDTO> todoDTOList = todoService.getAll();
-        for(TodoDTO todoDTO : todoDTOList) {
-            log.info(todoDTO);
-        }
-    }
+//    @Test
+//    public void testGetAll() {
+//        List<TodoDTO> todoDTOList = todoService.getAll();
+//        for(TodoDTO todoDTO : todoDTOList) {
+//            log.info(todoDTO);
+//        }
+//    }
 
 
 }

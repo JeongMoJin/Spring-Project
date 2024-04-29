@@ -37,6 +37,8 @@
       <div class="card-body">
 
           <form action="/todo/modify" method="post">
+            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+            <input type="hidden" name="size" value="${pageRequestDTO.size}">
           <div class="input-group mb-3">
             <span class="input-group-text">Tno</span>
             <input type="text" name="tno" class="form-control" value="${dto.tno}" readonly>
@@ -94,6 +96,9 @@
             frmView.action = '/todo/modify';
             frmView.method = 'post';
             frmView.submit();
+          })
+          document.querySelector('.btn-secondary').addEventListener('click', function (e) {
+            self.location = '/todo/list?${pageRequestDTO.link}'
           })
         </script>
 

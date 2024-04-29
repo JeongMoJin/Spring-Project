@@ -5,6 +5,7 @@ import com.example.spring_project_02.dto.PageRequestDTO;
 import com.example.spring_project_02.dto.PageResponseDTO;
 import com.example.spring_project_02.dto.TodoDTO;
 import com.example.spring_project_02.service.TodoService;
+import com.sun.tools.javac.comp.Todo;
 import jdk.jpackage.internal.Log;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -104,8 +105,20 @@ public class TodoMapperTest {
 //        log.info(pageResponseDTO);
 //        pageResponseDTO.getDtoList().stream().forEach(todoDTO -> log.info(todoDTO));
 //    }
-}
 
+    @Test
+    public void testSelectSearch() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .types(new String[]{"t", "w"})
+                .keyword("AAAA")
+                .build();
+
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        voList.forEach(vo -> log.info(vo));
+    }
+}
 
 
 
