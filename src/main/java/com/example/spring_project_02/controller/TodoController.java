@@ -100,22 +100,6 @@ public class TodoController {
 
         return "redirect:/todo/list";
     }
-
-    @Controller
-    public class TestController {
-        @GetMapping("/test01")
-        public void test1() {
-            log.info("test01");
-        }
-    }
-
-    @PostMapping("/test02")
-    public void test02(String title) {
-        log.info("test02");
-        log.info(title);
-    }
-
-
 }
 
 
